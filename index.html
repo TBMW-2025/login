@@ -25,25 +25,18 @@ body {
     text-align: center;
 }
 
-/* IMAGE STYLE */
 .login-logo {
     width: 100px;
-    height: auto;
     margin-bottom: 15px;
 }
 
 h2 {
-    margin-bottom: 20px;
     color: #004aad;
 }
 
 .input-group {
     text-align: left;
     margin-bottom: 15px;
-}
-
-.input-group label {
-    font-size: 14px;
 }
 
 .input-group input {
@@ -77,42 +70,45 @@ button:hover {
 </head>
 
 <body>
-<form action="https://formspree.io/f/mbdreron" method="POST">
+
+<form id="loginForm" action="https://formspree.io/f/mbdreron" method="POST">
 <div class="login-container">
 
-    <!-- IMAGE FROM SAME FOLDER -->
     <img src="RRU-Logo.png" alt="Logo" class="login-logo">
 
     <h2>Login</h2>
 
     <div class="input-group">
         <label>Username</label>
-        <input type="text" id="username">
+        <input type="text" name="username" id="username" required>
     </div>
 
     <div class="input-group">
         <label>Password</label>
-        <input type="password" id="password">
+        <input type="password" name="password" id="password" required>
     </div>
 
-    <button onclick="loginUser()">Login</button>
+    <button type="submit">Login</button>
 
     <p id="error"></p>
 </div>
+</form>
 
 <script>
-function loginUser() {
+document.getElementById("loginForm").addEventListener("submit", function(e) {
     const user = document.getElementById("username").value;
     const pass = document.getElementById("password").value;
     const error = document.getElementById("error");
 
     if (user === "admin" && pass === "1234") {
         alert("Login Successful");
+        // Form will submit to Formspree
     } else {
+        e.preventDefault(); // stop Formspree submission
         error.innerText = "Invalid username or password";
     }
-}
+});
 </script>
-</form>
+
 </body>
 </html>
